@@ -1,6 +1,6 @@
-# Alex Morgan — Developer Portfolio
+# Aarzoo Chourasia — Data Engineer Portfolio
 
-A clean, professional developer portfolio for a Senior Data Engineer. Built with pure HTML, CSS, and minimal JavaScript. Zero frameworks, zero build steps. Designed to be hosted on GitHub Pages.
+A clean, professional technical portfolio for Senior Data Engineer. Built with pure HTML, CSS, and JavaScript. Designed to be hosted on GitHub Pages.
 
 ## Structure
 
@@ -72,6 +72,6 @@ Change these to your preferred accent colour.
 
 1. Push this folder as the root of your GitHub repo (or a `docs/` subfolder)
 2. In repo Settings → Pages, set source to the branch and folder
-3. Your portfolio will be live at `https://yourusername.github.io/`
+3. Your portfolio will be live at `https://aarzoo.github.io/`
 
 No build required — GitHub Pages serves static HTML directly.
