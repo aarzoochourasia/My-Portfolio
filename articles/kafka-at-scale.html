@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kafka at Scale — Alex Morgan</title>
+  <meta name="description" content="Lessons from building a Kafka topology handling 5 billion daily events." />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <a href="../index.html" class="nav-logo">AM<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#articles">Articles</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-mobile-btn" id="mobileMenu" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="article-detail-header">
+      <a href="../index.html#articles" class="back-link">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        All Articles
+      </a>
+      <div class="article-meta">
+        <span class="article-date">February 18, 2025</span>
+        <span class="article-dot"></span>
+        <span class="article-read-time">8 min read</span>
+      </div>
+      <h1 class="display-lg">Kafka at Scale: Lessons from 5 Billion Daily Events</h1>
+      <p class="article-subtitle">
+        What we learned designing a Kafka topology that handles massive throughput without
+        sacrificing exactly-once guarantees or operational sanity.
+      </p>
+    </div>
+
+    <div class="article-detail-body">
+
+      <!-- ══ HERO IMAGE ══════════════════════════════════════════════
+           HOW TO ADD YOUR OWN:
+           Replace the <div class="article-hero-img"> block with:
+           <figure>
+             <img src="../assets/images/your-image.jpg" alt="Description" />
+             <figcaption>Optional caption here</figcaption>
+           </figure>
+      ════════════════════════════════════════════════════════════════ -->
+      <div class="article-hero-img">
+        Article header image · Replace with &lt;figure&gt;&lt;img&gt; tag
+      </div>
+
+      <div class="prose">
+        <p>
+          A year ago, we were processing roughly 800 million events a day on a fairly standard
+          Kafka setup — a handful of topics, sensible retention, consumer groups that mostly behaved.
+          Then the product launched in three new markets and daily volume crossed 5 billion.
+          The topology that hummed along perfectly at smaller scale started showing cracks.
+        </p>
+        <p>
+          This is a write-up of what broke, what we changed, and the handful of Kafka design
+          decisions I'd make differently from day one.
+        </p>
+
+        <!-- ══ IMAGE WITH CAPTION ══════════════════════════════════
+             Drop any image file into ../assets/images/
+             Then update the src below.
+        ═════════════════════════════════════════════════════════════
+        <figure>
+          <img src="../assets/images/kafka-topology.png" alt="Kafka cluster topology diagram" />
+          <figcaption>Our Kafka topology before and after the scaling incident.</figcaption>
+        </figure>
+        ════════════════════════════════════════════════════════════ -->
+
+        <h2>The Partition Problem</h2>
+        <p>
+          Our original topic partitioning was designed for a world with 20–30 consumers. Scaling
+          to hundreds of consumer instances revealed that partition count — not broker count — was
+          the actual bottleneck. Kafka's parallelism ceiling is exactly equal to the partition count
+          of a topic, and re-partitioning a live topic without message reordering is genuinely painful.
+        </p>
+
+        <!-- ══ CALLOUT BOX ══════════════════════════════════════════
+             Change class to: callout tip · callout info · callout warning
+        ════════════════════════════════════════════════════════════ -->
+        <div class="callout tip">
+          <span class="callout-icon">💡</span>
+          <p><strong>Key rule:</strong> Never go below 12 partitions on any topic that might need to scale. Default to 2× your maximum expected consumer count.</p>
+        </div>
+
+        <h3>Consumer Group Design</h3>
+        <p>
+          Isolation matters. Separate consumer groups for operational versus analytical workloads —
+          different SLAs, different teams, different alert thresholds. We use
+          <code>group.id</code> naming conventions to make ownership obvious at a glance:
+          <code>payments-ops-v2</code> vs <code>payments-analytics-v1</code>.
+        </p>
+
+        <!-- ══ SIDE-BY-SIDE IMAGES ═════════════════════════════════
+             Good for before/after comparisons
+        ═════════════════════════════════════════════════════════════
+        <div class="img-row">
+          <img src="../assets/images/before.png" alt="Before: single consumer group" />
+          <img src="../assets/images/after.png"  alt="After: isolated consumer groups" />
+        </div>
+        ════════════════════════════════════════════════════════════ -->
+
+        <h2>Exactly-Once Is Not Free</h2>
+        <p>
+          Kafka's exactly-once semantics are real, but they come with a latency cost that caught
+          us off guard. The transactional overhead added roughly 35ms to our P99 at peak load.
+        </p>
+
+        <!-- ══ BLOCKQUOTE / PULL QUOTE ════════════════════════════ -->
+        <blockquote>
+          <p>Know your SLAs before you commit to a consistency model. You cannot bolt on latency requirements after the fact.</p>
+          <cite>— Lesson learned at 3am on a Friday</cite>
+        </blockquote>
+
+        <p>
+          We adopted idempotent producers plus application-level deduplication for latency-sensitive
+          paths, reserving full transactional producers only where the business strictly required
+          exactly-once.
+        </p>
+
+        <!-- ══ CODE BLOCK — Python ════════════════════════════════
+             The class="language-python" sets the label in the header.
+             Supported labels: python, sql, yaml, bash, scala, go, json, etc.
+             The Copy button is added automatically by main.js.
+        ════════════════════════════════════════════════════════════ -->
+        <pre><code class="language-python">from confluent_kafka import Producer
+
+# Idempotent producer — safe for high-throughput, latency-sensitive paths
+producer_config = {
+    'bootstrap.servers': 'kafka-1:9092,kafka-2:9092,kafka-3:9092',
+    'enable.idempotence': True,       # No duplicate messages on retry
+    'acks': 'all',                    # Wait for all in-sync replicas
+    'retries': 5,
+    'max.in.flight.requests.per.connection': 5,
+    'compression.type': 'snappy',     # ~3x compression on JSON payloads
+}
+
+producer = Producer(producer_config)
+
+def on_delivery(err, msg):
+    if err:
+        print(f'Delivery failed for {msg.key()}: {err}')
+    else:
+        print(f'Delivered → {msg.topic()} partition [{msg.partition()}]')
+
+producer.produce(
+    topic='payment-events',
+    key=str(event.user_id).encode('utf-8'),
+    value=event.to_avro(),       # Avro-serialised via Schema Registry
+    callback=on_delivery
+)
+producer.flush(timeout=10)
+</code></pre>
+
+        <h2>Operational Learnings</h2>
+
+        <div class="callout warning">
+          <span class="callout-icon">⚠️</span>
+          <p>Consumer lag is a <strong>lagging indicator</strong>. By the time it's alarming, the problem is already 10 minutes old. Instrument produce rate and consumer throughput independently.</p>
+        </div>
+
+        <ul>
+          <li>Broker disk is not infinite — treat retention config as an ongoing operational concern, not set-and-forget</li>
+          <li>Schema Registry is non-negotiable at scale — untyped JSON topics are a future incident waiting to happen</li>
+          <li>Test consumer group rebalance behaviour under load before you need to rely on it in production</li>
+        </ul>
+
+        <!-- ══ CODE BLOCK — YAML ══════════════════════════════════ -->
+        <pre><code class="language-yaml"># Consumer group config — operational vs analytics isolation
+operational-consumer:
+  group.id: payments-ops-v2
+  auto.offset.reset: latest       # Only new events — fast path
+  max.poll.interval.ms: 30000
+  session.timeout.ms: 10000
+
+analytics-consumer:
+  group.id: payments-analytics-v1
+  auto.offset.reset: earliest     # Can replay full history
+  max.poll.interval.ms: 300000    # Batch processing — loose timeout ok
+  session.timeout.ms: 45000
+</code></pre>
+
+        <h2>What I'd Do Differently</h2>
+        <p>
+          Over-partition aggressively, use Schema Registry from commit one, instrument produce and
+          consume rates independently, and plan disk capacity before you need it. Schema drift and
+          insufficient partitions are much harder to fix retroactively than broker tuning.
+        </p>
+
+        <div class="callout info">
+          <span class="callout-icon">📖</span>
+          <p>For deeper reading: the <a href="https://kafka.apache.org/documentation/" target="_blank" rel="noopener">official Kafka docs</a> on producer config and the Confluent blog on exactly-once semantics are both excellent.</p>
+        </div>
+
+        <hr />
+
+        <p>Questions or pushback? Reach me via the <a href="../index.html#contact">contact page</a>.</p>
+
+      </div>
+
+      <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <a href="../index.html#articles" class="back-link" style="margin-bottom: 0;">← All Articles</a>
+        <div style="display: flex; gap: 0.75rem;">
+          <a href="https://medium.com/@alexmorgan" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size: 0.7rem;">Read on Medium</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2025 Alex Morgan</p>
+    <a href="../index.html" class="back-link" style="margin-bottom: 0;">← Back to Portfolio</a>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

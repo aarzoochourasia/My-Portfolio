@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real-Time Event Pipeline — Alex Morgan</title>
+  <meta name="description" content="High-throughput Kafka-based pipeline processing 5B+ events/day with sub-100ms latency SLAs." />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <a href="../index.html" class="nav-logo">AM<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#articles">Articles</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-mobile-btn" id="mobileMenu" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="page-header">
+      <a href="../index.html#projects" class="back-link">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        All Projects
+      </a>
+      <span class="section-label">Data Pipeline</span>
+      <h1 class="display-lg">Real-Time Event Pipeline</h1>
+      <div class="page-meta">
+        <span class="page-meta-item">2024</span>
+        <span class="page-meta-item">Fintech Platform</span>
+        <span class="page-meta-item">5B+ events/day</span>
+        <span class="page-meta-item">Sub-100ms latency</span>
+      </div>
+    </div>
+
+    <div class="detail-body">
+      <div class="detail-main">
+        <div class="detail-placeholder">
+          Project Architecture Diagram · Replace with actual image
+        </div>
+
+        <div class="prose">
+          <p>
+            This project involved designing and building a high-throughput real-time event streaming
+            pipeline for a Series C fintech company processing payment events, user actions, and fraud
+            signals across 40+ markets. The core constraint: every event had to be processed and
+            available for downstream queries within 100 milliseconds at p99.
+          </p>
+
+          <h2>The Challenge</h2>
+          <p>
+            The existing batch-based system ran on 6-hour cycles, meaning fraud detection models
+            worked with stale features and business teams couldn't react to intraday patterns.
+            The engineering challenge was rebuilding this to stream without disrupting the existing
+            fraud models that the business depended on.
+          </p>
+
+          <h3>Architecture Decisions</h3>
+          <p>
+            We chose Kafka as the event backbone for its durability guarantees and broad ecosystem
+            support. Apache Flink handled the stateful stream processing — session windowing and
+            late-event handling being the most complex pieces. Events flow from Kafka through Flink
+            into PostgreSQL for the operational store and into our data warehouse for analytics.
+          </p>
+
+          <h2>Key Engineering Challenges</h2>
+          <ul>
+            <li>Exactly-once semantics across Kafka and PostgreSQL under partial failures</li>
+            <li>Backpressure management during traffic spikes (Black Friday saw 8× normal load)</li>
+            <li>Schema evolution without downtime across 12 event types</li>
+            <li>Late-arriving events reconciliation across timezone boundaries</li>
+            <li>Multi-region replication with active-passive failover under 30s</li>
+          </ul>
+
+          <h2>Results</h2>
+          <p>
+            The pipeline has been running in production for 14 months. P99 end-to-end latency
+            sits at 68ms. We've had zero data loss incidents. The fraud team reported a 22% improvement
+            in detection rates within 6 weeks of migration, attributable directly to fresher features.
+          </p>
+          <p>
+            Infrastructure costs actually decreased 18% compared to the old batch cluster, primarily
+            because Flink's streaming model eliminated the need to re-process historical data on each run.
+          </p>
+        </div>
+      </div>
+
+      <div class="detail-sidebar">
+        <div class="sidebar-block">
+          <p class="sidebar-block-title">Tech Stack</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Apache Kafka</span>
+            <span class="tech-tag">Apache Flink</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Terraform</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Kubernetes</span>
+            <span class="tech-tag">AWS MSK</span>
+          </div>
+        </div>
+
+        <div class="sidebar-block">
+          <p class="sidebar-block-title">Links</p>
+          <a href="#" class="sidebar-link" target="_blank" rel="noopener">
+            GitHub Repository
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+            </svg>
+          </a>
+          <a href="#" class="sidebar-link" target="_blank" rel="noopener">
+            Technical Write-Up
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="sidebar-block">
+          <p class="sidebar-block-title">Metrics</p>
+          <div class="sidebar-metrics">
+            <div>
+              <span class="sidebar-metric-val">5B+</span>
+              <span class="sidebar-metric-lbl">Events per day</span>
+            </div>
+            <div>
+              <span class="sidebar-metric-val">68ms</span>
+              <span class="sidebar-metric-lbl">P99 latency</span>
+            </div>
+            <div>
+              <span class="sidebar-metric-val">18%</span>
+              <span class="sidebar-metric-lbl">Cost reduction</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2025 Alex Morgan</p>
+    <a href="../index.html" class="back-link" style="margin-bottom: 0;">← Back to Portfolio</a>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
