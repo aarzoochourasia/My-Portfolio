@@ -1,6 +1,6 @@
-# Alex Morgan — Developer Portfolio
+# Aarzoo Chourasia — Data Engineer Portfolio
 
-A clean, professional developer portfolio for a Senior Data Engineer. Built with pure HTML, CSS, and minimal JavaScript. Zero frameworks, zero build steps. Designed to be hosted on GitHub Pages.
+A clean, professional developer portfolio for a Senior Data Engineer. Built with pure HTML, CSS, and JavaScript. Designed to be hosted on GitHub Pages.
 
 ## Structure
 
