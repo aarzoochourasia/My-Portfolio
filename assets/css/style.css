@@ -57,7 +57,7 @@ ul{list-style:none;}
 
 .section-label{
   font-family:var(--font-mono);
-  font-size:0.72rem;
+  font-size:0.75rem;
   font-weight:500;
   letter-spacing:0.18em;
   text-transform:uppercase;
@@ -139,7 +139,7 @@ ul{list-style:none;}
 /* Name — large but no longer overwhelming */
 .hero-name{
   font-family:var(--font-display);
-  font-size:clamp(2.8rem,5.5vw,5rem);
+  font-size:clamp(2.4rem, 4.5vw, 3.8rem);
   font-weight:700;
   line-height:1.02;
   letter-spacing:-0.025em;
@@ -276,7 +276,7 @@ ul{list-style:none;}
 .skills-panel{position:sticky;top:80px;}
 .skills-category{margin-bottom:1.75rem;}
 .skills-category-label{
-  font-family:var(--font-mono);font-size:0.7rem;font-weight:500;
+  font-family:var(--font-mono);font-size:0.75rem;font-weight:500;
   letter-spacing:0.14em;text-transform:uppercase;
   color:var(--accent);
   margin-bottom:0.75rem;padding-bottom:0.5rem;
@@ -331,7 +331,7 @@ footer p{font-family:var(--font-mono);font-size:0.7rem;color:var(--text-light);l
 }
 .back-link:hover{color:var(--accent);}
 .page-meta{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:1.25rem;}
-.page-meta-item{font-family:var(--font-mono);font-size:0.71rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-light);display:flex;align-items:center;gap:0.4rem;}
+.page-meta-item{font-family:var(--font-mono);font-size:0.73rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-light);display:flex;align-items:center;gap:0.4rem;}
 .page-meta-item::before{content:'';width:4px;height:4px;background:var(--accent);border-radius:50%;}
 .page-meta-item:first-child::before{display:none;}
 .detail-body{display:grid;grid-template-columns:1fr 280px;gap:4rem;align-items:start;margin-bottom:5rem;}
