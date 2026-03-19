@@ -273,6 +273,8 @@ ul{list-style:none;}
 .bookshelf-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
 
 @media (max-width: 1024px) {
   .bookshelf-grid { grid-template-columns: repeat(2, 1fr); }
@@ -303,6 +305,7 @@ ul{list-style:none;}
   box-shadow: -4px 0 8px rgba(23,25,46,0.12), var(--shadow-sm);
   margin-bottom: 0.85rem;
   transition: box-shadow var(--transition);
+  width: 100%;
 }
 
 .book-card:hover .book-cover {
