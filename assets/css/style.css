@@ -274,15 +274,25 @@ ul{list-style:none;}
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  max-width: 660px;
+  max-width: 700px;
+  margin: 0 auto;
 }
-
 @media (max-width: 768px) {
-  .bookshelf-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .bookshelf-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    max-width: 460px;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 480px) {
-  .bookshelf-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .bookshelf-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 100%;
+    margin: 0 auto;
+  }
 }
 
 .book-card {
@@ -299,7 +309,7 @@ ul{list-style:none;}
 .book-cover {
   position: relative;
   width: 100%;
-  padding-bottom: 150%;
+  padding-bottom: 130%;
   border-radius: 4px 6px 6px 4px;
   overflow: hidden;
   background: var(--bg-alt);
