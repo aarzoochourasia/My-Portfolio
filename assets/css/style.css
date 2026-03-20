@@ -377,15 +377,26 @@ ul{list-style:none;}
 
 .book-notes-link {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent);
+  margin-top: 0.5rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  transition: gap var(--transition);
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  border: 1.5px solid var(--accent);
+  border-radius: 4px;
+  transition: all var(--transition);
+  background: transparent;
+}
+
+.book-card:hover .book-notes-link {
+  background: var(--accent);
+  color: #fff;
+  gap: 0.55rem;
 }
 
 .book-card:hover .book-notes-link { gap: 0.5rem; }
