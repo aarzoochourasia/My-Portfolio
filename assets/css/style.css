@@ -67,7 +67,7 @@ ul{list-style:none;}
 }
 
 .section-header{margin-bottom:3.5rem;}
-.section-header p{max-width:62ch;color:var(--text-muted);margin-top:0.75rem;font-size:1.05rem;line-height:1.75;}
+.section-header p{max-width:68ch;color:var(--text-muted);margin-top:0.75rem;font-size:1.05rem;line-height:1.75;}
 
 /* =====================
    NAVIGATION
@@ -282,8 +282,12 @@ ul{list-style:none;}
    ===================== */
 .bookshelf-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);  gap: 2.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 780px;
+  margin: 0 auto;
 }
+
 @media (max-width: 768px) {
   .bookshelf-grid {
     grid-template-columns: repeat(2, 1fr);
