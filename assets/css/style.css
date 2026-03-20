@@ -386,16 +386,16 @@ ul{list-style:none;}
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-top: 0.5rem;
+  margin-top: auto;
   display: inline-flex;
   align-items: center;
-  align-self: flex-start;
   gap: 0.35rem;
   padding: 0.4rem 0.85rem;
   border: 1.5px solid var(--accent);
   border-radius: 4px;
   transition: all var(--transition);
   background: transparent;
+  align-self: flex-start;
 }
 
 .book-card:hover .book-notes-link {
