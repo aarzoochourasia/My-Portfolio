@@ -95,35 +95,6 @@
       </div>
 
       <div class="projects-grid">
-
-        <a href="projects/realtime-pipeline.html" class="project-card reveal">
-          <div class="project-img-wrap">
-            <div class="project-img-placeholder">
-              <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" />
-              </svg>
-            </div>
-            <div class="project-img-overlay">
-              <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-              </svg>
-            </div>
-          </div>
-          <div class="project-body">
-            <span class="project-category">Data Pipeline</span>
-            <h3 class="project-title">Real-Time Event Pipeline</h3>
-            <p class="project-desc">High-throughput Kafka-based pipeline processing 5B+ events/day for a fintech platform, with sub-100ms latency SLAs and full audit trails.</p>
-            <div class="tech-stack">
-              <span class="tech-tag">Apache Kafka</span>
-              <span class="tech-tag">Apache Flink</span>
-              <span class="tech-tag">Spark</span>
-              <span class="tech-tag">AWS S3</span>
-              <span class="tech-tag">Prometheus</span>
-
-            </div>
-          </div>
-        </a>
-
         <a href="projects/ml-feature-store.html" class="project-card reveal">
           <div class="project-img-wrap">
             <div class="project-img-placeholder">
@@ -138,14 +109,44 @@
             </div>
           </div>
           <div class="project-body">
-            <span class="project-category">CDC</span>
-            <h3 class="project-title">Production Change Data Capture Pipeline</h3>
-            <p class="project-desc">Centralised feature platform serving 200+ ML models in production, eliminating training-serving skew and reducing feature engineering time by 60%.</p>
+            <span class="project-category">Batch Processing</span>
+            <h3 class="project-title">Batch Data Platform on AWS</h3>
+            <p class="project-desc">Complete end-to-end batch pipeline from ingestion to modeled data — built on Iceberg, dbt, and Airflow with Terraform infrastructure and CI/CD.</p>
             <div class="tech-stack">
-              <span class="tech-tag">Debezium</span>
-              <span class="tech-tag">Redis</span>
-              <span class="tech-tag">Kafka</span>
-              <span class="tech-tag">Python</span>
+              <span class="tech-tag">AWS Glue</span>
+              <span class="tech-tag">Apache Iceberg</span>
+              <span class="tech-tag">dbt</span>
+              <span class="tech-tag">Apache Airflow</span>
+              <span class="tech-tag">Terraform</span>
+              <span class="tech-tag">GitHub Actions</span>
+            </div>
+          </div>
+        </a>
+        
+        <a href="projects/realtime-pipeline.html" class="project-card reveal">
+          <div class="project-img-wrap">
+            <div class="project-img-placeholder">
+              <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" />
+              </svg>
+            </div>
+            <div class="project-img-overlay">
+              <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="project-category">Streaming</span>
+            <h3 class="project-title">Real-Time Streaming Pipeline</h3>
+            <p class="project-desc">Kafka to Delta Lake streaming pipeline with exactly-once semantics, schema registry, and live Grafana observability.</p>
+            <div class="tech-stack">
+              <span class="tech-tag">Apache Kafka</span>
+              <span class="tech-tag">Delta Lake</span>
+              <span class="tech-tag">Spark Streaming</span>
+              <span class="tech-tag">Schema Registry</span>
+              <span class="tech-tag">Exactly-Once</span>
+
             </div>
           </div>
         </a>
@@ -165,39 +166,15 @@
           </div>
           <div class="project-body">
             <span class="project-category">Data Architecture</span>
-            <h3 class="project-title">Scalable Lakehouse Architecture</h3>
-            <p class="project-desc">Migrated a legacy Hadoop cluster to a modern lakehouse architecture on AWS, cutting query costs by 73% and improving reliability from 94% to 99.9%.</p>
+            <h3 class="project-title">Azure Lakehouse Migration</h3>
+            <p class="project-desc">Legacy-to-Azure migration of logistics freight data — Databricks, Delta Lake, dbt, and full Azure DevOps CI/CD.</p>
             <div class="tech-stack">
-              <span class="tech-tag">Apache Iceberg</span>
+              <span class="tech-tag">Databricks</span>
+              <span class="tech-tag">PySpark</span>
               <span class="tech-tag">dbt</span>
-              <span class="tech-tag">AWS</span>
-              <span class="tech-tag">Spark</span>
-            </div>
-          </div>
-        </a>
-
-        <a href="projects/analytics-platform.html" class="project-card reveal">
-          <div class="project-img-wrap">
-            <div class="project-img-placeholder">
-              <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
-              </svg>
-            </div>
-            <div class="project-img-overlay">
-              <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-              </svg>
-            </div>
-          </div>
-          <div class="project-body">
-            <span class="project-category">Data Warehouse</span>
-            <h3 class="project-title">Incremental Data Warehouse Pipelines</h3>
-            <p class="project-desc">End-to-end analytics platform enabling non-technical teams to build dashboards without SQL. Onboarded 150+ analysts in the first month.</p>
-            <div class="tech-stack">
-              <span class="tech-tag">Metabase</span>
-              <span class="tech-tag">dbt</span>
-              <span class="tech-tag">Snowflake</span>
-              <span class="tech-tag">Airflow</span>
+              <span class="tech-tag">ADF</span>
+              <span class="tech-tag">ADLS Gen2</span>
+              <span class="tech-tag">Azure DevOps</span>
             </div>
           </div>
         </a>
@@ -217,12 +194,42 @@
           </div>
           <div class="project-body">
             <span class="project-category">Data Observability</span>
-            <h3 class="project-title">Data Quality & Observability</h3>
+            <h3 class="project-title">Data Quality & Observability Framework</h3>
             <p class="project-desc">Open-source framework for continuous data quality monitoring with automated alerting and root-cause analysis across 500+ tables.</p>
             <div class="tech-stack">
               <span class="tech-tag">Great Expectations</span>
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">PagerDuty</span>
+              <span class="tech-tag">Soda core</span>
+              <span class="tech-tag">Structured Logging</span>
+              <span class="tech-tag">Grafana</span>
+              <span class="tech-tag">Data Contracts</span>
+            </div>
+          </div>
+        </a>        
+
+        
+        <a href="projects/analytics-platform.html" class="project-card reveal">
+          <div class="project-img-wrap">
+            <div class="project-img-placeholder">
+              <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+              </svg>
+            </div>
+            <div class="project-img-overlay">
+              <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="project-category">ML Infrastructure</span>
+            <h3 class="project-title">ML Feature Engineering Pipeline</h3>
+            <p class="project-desc">Point-in-time correct feature pipeline with Feast feature store, MLflow tracking, and model drift monitoring.</p>
+            <div class="tech-stack">
+              <span class="tech-tag">PySpark</span>
+              <span class="tech-tag">Feast</span>
+              <span class="tech-tag">MLflow</span>
+              <span class="tech-tag">DVC</span>
+              <span class="tech-tag">Point-in-Time Joins</span>
             </div>
           </div>
         </a>
@@ -241,13 +248,15 @@
             </div>
           </div>
           <div class="project-body">
-            <span class="project-category">Analytics</span>
-            <h3 class="project-title">Operational intelligence Platform</h3>
-            <p class="project-desc">Live operational dashboard aggregating metrics from 12 microservices, powering real-time incident response and business monitoring for C-suite.</p>
+            <span class="project-category">System Design</span>
+            <h3 class="project-title">Logistics Data Platform</h3>
+            <p class="project-desc"> Written system design for a real-time freight data platform — trade-off analysis, cost estimates, and Architecture Decision Records.</p>
             <div class="tech-stack">
-              <span class="tech-tag">Apache Druid</span>
-              <span class="tech-tag">Grafana</span>
-              <span class="tech-tag">Kubernetes</span>
+              <span class="tech-tag">System Design</span>
+              <span class="tech-tag">Lambda Architecture</span>
+              <span class="tech-tag">Cost Engineering</span>
+              <span class="tech-tag">GDPR Compliance</span>
+              <span class="tech-tag">ADR</span>
             </div>
           </div>
         </a>
